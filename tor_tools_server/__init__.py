@@ -27,6 +27,7 @@ def create_app(test_config=None):
         pass
 
     @app.route('/hello')
+
     def hello():
         txt = '<html><body><h1>' + request.remote_addr + '</h1><table>'
         for h in request.headers:
@@ -35,6 +36,10 @@ def create_app(test_config=None):
 
         txt += '</table></body></html>'
         return txt
+
+    @app.route('/echo', methods=['GET', 'POST'])
+    def echo():
+        return range(0, 1024).join(',')
 
     # register the database commands
     # from flaskr import db
@@ -52,3 +57,4 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='index')
 
     return app
+
