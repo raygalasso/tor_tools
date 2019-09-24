@@ -1,7 +1,8 @@
 import os
 
-from flask import Flask, request
+from flask import Flask, request, send_file
 from tor_tools_server import routes
+from datetime import datetime
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -35,6 +36,22 @@ def create_app(test_config=None):
 
         txt += '</table></body></html>'
         return txt
+
+
+
+    @app.route('/scott.png')
+    def scott_jpg():
+        txt = '\n' + request.remote_addr + '\n'
+        for h in request.headers:
+
+            txt +=  h[0] + ' : ' + h[1] + '\n'
+
+        txt += '\n\n'
+        # print txt
+        with open("/home/blksun813/scott.txt", "a+") as f:
+            f.write(str(datetime.now()))
+            f.write(txt)
+        return send_file('/home/blksun813/scott.png', mimetype='image/png')
 
     # register the database commands
     # from flaskr import db
