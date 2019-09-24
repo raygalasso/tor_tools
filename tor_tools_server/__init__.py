@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask, request
-from tor_tools_server import routes
+import pandas as pd
 
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
@@ -26,8 +26,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/hello')
+    @app.route('/onions')
+    def onions():
+        links = pd.read_json('onions.json')
+        return links.to_html()
 
+    @app.route('/hello')
     def hello():
         txt = '<html><body><h1>' + request.remote_addr + '</h1><table>'
         for h in request.headers:
