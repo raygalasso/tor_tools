@@ -38,8 +38,6 @@ def create_app(test_config=None):
         txt += '</table></body></html>'
         return txt
 
-<<<<<<< HEAD
-
 
     @app.route('/scott.png')
     def scott_jpg():
@@ -54,11 +52,11 @@ def create_app(test_config=None):
             f.write(str(datetime.now()))
             f.write(txt)
         return send_file('/home/blksun813/scott.png', mimetype='image/png')
-=======
+
+
     @app.route('/echo', methods=['GET', 'POST'])
     def echo():
         return range(0, 1024).join(',')
->>>>>>> 1bf09b6a628415d7217070c6e4210a294dbc1d19
 
     # register the database commands
     # from flaskr import db
